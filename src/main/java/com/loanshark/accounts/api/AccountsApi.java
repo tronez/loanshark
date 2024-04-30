@@ -5,6 +5,9 @@ import com.loanshark.accounts.api.dto.FullCustomerInformationDto;
 import com.loanshark.accounts.api.dto.ResponseDto;
 import com.loanshark.accounts.domain.AccountService;
 import com.loanshark.accounts.exception.AccountExceptionStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,10 +28,16 @@ import java.util.UUID;
 @RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Validated
+@Tag(name = "Rest API for accounts")
 public class AccountsApi {
     private final AccountService accountService;
 
     @PostMapping("/accounts")
+    @Operation(
+            summary = "Create account",
+            description = "Creates customer and account"
+    )
+    @ApiResponse(responseCode = "201")
     public ResponseEntity<FullCustomerInformationDto> createAccount(@Valid @RequestBody CustomerDto customerDto) {
         FullCustomerInformationDto customerInformation = accountService.createAccount(customerDto);
 
@@ -36,14 +45,17 @@ public class AccountsApi {
                 .status(HttpStatus.CREATED)
                 .body(customerInformation);
     }
-
     @GetMapping("/accounts")
+    @Operation(summary = "Fetch full customer and account information")
+    @ApiResponse(responseCode = "200")
     public ResponseEntity<FullCustomerInformationDto> getAccountDetails(@RequestParam(name = "mobileNumber") String mobileNumber) {
         final FullCustomerInformationDto details = accountService.getAccountDetails(mobileNumber);
         return ResponseEntity.ok(details);
     }
 
     @DeleteMapping("/accounts")
+    @Operation(summary = "Delete customer and account")
+    @ApiResponse(responseCode = "200")
     public ResponseEntity<ResponseDto> deleteAccount(@RequestParam UUID customerId) {
         accountService.deleteAccount(customerId);
 
