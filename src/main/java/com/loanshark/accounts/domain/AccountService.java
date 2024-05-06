@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
@@ -19,6 +18,7 @@ import java.util.UUID;
 public class AccountService {
     private final AccountsRepository accountsRepository;
     private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
     public FullCustomerInformationDto createAccount(CustomerDto customerDto) {
         Optional<Customer> optionalCustomer = customerRepository.findByMobileNumber(customerDto.mobileNumber());
@@ -26,7 +26,7 @@ public class AccountService {
             throw new CustomerAlreadyExistsException("Customer had already been registered with given mobile number");
         });
 
-        Customer customer = CustomerMapper.INSTANCE.toEntity(customerDto);
+        Customer customer = customerMapper.toEntity(customerDto);
 
         Customer savedCustomer = customerRepository.save(customer);
         Account savedAccount = accountsRepository.save(newAccount(savedCustomer));
