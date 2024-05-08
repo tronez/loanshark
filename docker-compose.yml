@@ -1,0 +1,30 @@
+services:
+  accountsdb:
+    image: postgres:16.2-alpine@sha256:951bfda460300925caa3949eaa092ba022e9aec191bbea9056a39e2382260b27
+    container_name: accountsdb
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: accountsdb
+
+#  accounts:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: accounts-ms
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      accountsdb:
+#        condition: service_healthy
+#    environment:
+#      SPRING_APPLICATION_NAME: "accounts"
+#      SPRING_DATASOURCE_URL: "jdbc:postgresql://accountsdb:5432/accountsdb"
