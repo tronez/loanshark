@@ -41,6 +41,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.testcontainers:testcontainers:1.19.7"
     testImplementation 'org.testcontainers:postgresql:1.19.7'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
 }
 
 tasks.named('test') {
