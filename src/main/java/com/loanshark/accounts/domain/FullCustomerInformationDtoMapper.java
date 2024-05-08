@@ -1,6 +1,6 @@
 package com.loanshark.accounts.domain;
 
-import com.loanshark.accounts.api.dto.FullCustomerInformationDto;
+import com.loanshark.accounts.dto.FullCustomerInformationDto;
 
 public class FullCustomerInformationDtoMapper {
     public static FullCustomerInformationDto toDto(Customer customer, Account account) {

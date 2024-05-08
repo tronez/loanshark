@@ -1,6 +1,6 @@
 package com.loanshark.accounts.domain;
 
-import com.loanshark.accounts.api.dto.CustomerDto;
+import com.loanshark.accounts.dto.CustomerDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

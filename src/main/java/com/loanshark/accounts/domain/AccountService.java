@@ -1,7 +1,7 @@
 package com.loanshark.accounts.domain;
 
-import com.loanshark.accounts.api.dto.CustomerDto;
-import com.loanshark.accounts.api.dto.FullCustomerInformationDto;
+import com.loanshark.accounts.dto.CustomerDto;
+import com.loanshark.accounts.dto.FullCustomerInformationDto;
 import com.loanshark.accounts.exception.CustomerAlreadyExistsException;
 import com.loanshark.accounts.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
