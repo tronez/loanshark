@@ -49,3 +49,8 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register("bootRunLocal", JavaExec) {
+    dependsOn("bootRun")
+    bootRun.systemProperty("spring.profiles.active", "local")
+}
